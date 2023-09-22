@@ -62,5 +62,43 @@ Dengan hasil di atas, dicari nilai checksum dan didapatkan **Checksum: 0x18e5 [u
 
 Dengan memasukkan nilai checksum maka didapatkan flag untuk nomor 4.
 
+## Soal 5
+### Cara Pengerjaan
+Pada soal, tertera 2 file, yaitu pcap dan sebuah zip yang terkunci
+Setelah dilakukan Follow TCP, ditemukan sebual packet yang "sus" yang merupakan hasil ecnryption base64
 
+Setelah di decode, terugnkap yagn kemungkinan password file, yaitu
+```5implePas5word```
+Setelah dibuka, terungkap nc
+
+Lalu kita akan menjawab soal
+
+Dengan menjawab semua soal, maka didapatkan flag untuk No. 5
+
+## Soal 6
+### Cara Pengerjaan
+Clue terakhir membawa kita ke packet 7812
+Lalu clue awal yaitu a1 e5 mengindikasikan bahwa terjadi pertukaran huruf dan angka,
+
+Dengan adanya source Address dari Packet 7812 adalah 104.18.14.101
+
+Lalu juga dengan clue bahwa jawaban adalah 6 huruf, maka kami coba nc dan merubah angka menjadi huruf, menjadi
+**JDRNJA**
+Setelah dimasukkan di nc, maka didapatkan flag No.6
+
+## Soal 7
+### Cara Pengerjaan
+Pada soal diminta untuk mencari jumlah paket yang menuju IP 184.87.193.88, sehingga digunakan filter 
+**ip.dst == 184.87.193.88**
+Sehingga didapatkan jumlahnya sebanyak 6.
+
+Setelah dimasukkan ke nc, maka didapatkan flag No.6
+
+## Soal 8
+### Cara Pengerjaan
+Pada soal diminta untuk mencari jumlah paket yang menuju IP 184.87.193.88, sehingga digunakan filter 
+**ip.dst == 184.87.193.88**
+Sehingga didapatkan jumlahnya sebanyak 6.
+
+Setelah dimasukkan ke nc, maka didapatkan flag No.6
 
