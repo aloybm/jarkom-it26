@@ -133,6 +133,6 @@ Jadi kredensialnya adlaah
 Setelah dimasukkan ke nc, ditemukanlah flag untuk No.10
 
 ## Kendala Pengerjaan
-Kendalah saat pengerjaan seluruh soal adalah laptop dipakai temen untuk melakukan netcat.
+Kendala saat pengerjaan seluruh soal adalah laptop dipakai temen untuk melakukan `netcat`.
 
 
