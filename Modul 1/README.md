@@ -70,8 +70,10 @@ Setelah dilakukan Follow TCP, ditemukan sebual packet yang "sus" yang merupakan 
 Setelah di decode, terugnkap yagn kemungkinan password file, yaitu
 ```5implePas5word```
 Setelah dibuka, terungkap nc
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/6605d480-27b4-4cae-aac0-db3d2d85219a)
 
 Lalu kita akan menjawab soal
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/99d67445-6e5e-46ff-a826-ae6822862bda)
 
 Dengan menjawab semua soal, maka didapatkan flag untuk No. 5
 
@@ -84,21 +86,50 @@ Dengan adanya source Address dari Packet 7812 adalah 104.18.14.101
 
 Lalu juga dengan clue bahwa jawaban adalah 6 huruf, maka kami coba nc dan merubah angka menjadi huruf, menjadi
 **JDRNJA**
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/7b94db18-6b25-4820-9966-3c6882a997aa)
+
 Setelah dimasukkan di nc, maka didapatkan flag No.6
 
 ## Soal 7
 ### Cara Pengerjaan
 Pada soal diminta untuk mencari jumlah paket yang menuju IP 184.87.193.88, sehingga digunakan filter 
 **ip.dst == 184.87.193.88**
-Sehingga didapatkan jumlahnya sebanyak 6.
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/8541b282-7cc4-4c8f-b67e-cbfa8e97961c)
 
-Setelah dimasukkan ke nc, maka didapatkan flag No.6
+Sehingga didapatkan jumlahnya sebanyak 6.
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/50f485ac-6a53-4b35-bc18-0876598dc1df)
+
+Setelah dimasukkan ke nc, maka didapatkan flag No.7
 
 ## Soal 8
 ### Cara Pengerjaan
-Pada soal diminta untuk mencari jumlah paket yang menuju IP 184.87.193.88, sehingga digunakan filter 
-**ip.dst == 184.87.193.88**
-Sehingga didapatkan jumlahnya sebanyak 6.
+Pada soal diminta untuk melakukan kueri filter, sehingga filternya menggunakan **tcp.dstport == 80 || udp.dstport == 80**
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/2f443b7e-a037-4bff-846d-0327b7f6cbd2)
 
-Setelah dimasukkan ke nc, maka didapatkan flag No.6
+Maka didapatkan flag No.8
+
+## Soal 9
+### Cara Pengerjaan
+DIminta query filter sehingga wireshark hanya mengambil paket yang berasal dari alamat 10.51.40.1 tetapi tidak menuju ke alamat 10.39.55.34, maka menggunakan
+**ip.src == 10.51.40.1 && ip.dst != 10.39.55.34**
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/12d47885-84c5-42db-9c92-c136fa52c7c4)
+
+Maka didapatkan flag No.9
+
+## Soal 10
+### Cara Pengerjaan
+Sebutkan kredensial yang benar ketika user mencoba login menggunakan Telnet!
+maka mengggunakan filter, **telnet**
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/8d09d0de-7249-45a1-973a-4afeba837c11)
+
+Setelah dianalisis, terdapat bagian saat dhafin mau enter kredensial (yang kemungkinan besar tidak fake)
+Setelah next terus, ditemukan usernamenya adalah,
+**dhafin**
+Lalu setelah itu, ditemukan yang kemungkinan besar adalah passwordnya.
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/9975dbfb-83f8-499a-9ef3-bb5c76c59075)
+
+Jadi kredensialnya adlaah
+**dhafin:kesayangannyak0k0**
+Setelah dimasukkan ke nc, ditemukanlah flag untuk No.10
+
 
