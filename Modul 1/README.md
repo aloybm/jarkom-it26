@@ -14,13 +14,13 @@ User melakukan banyak aktivitas, tetapi terdapat satu aktivitas `STOR` yang dila
 
 ![image](https://github.com/aloybm/jarkom-it26/assets/100351038/193f065f-d0cf-4f84-86d0-daf56c11ed9b)
 
-Dari hasil tersebut didapatkan untuk soal 1.a.**Sequence Number (raw): 258040667** dan 1.b. **Acknowledgment number (raw): 1044861039**.
+Dari hasil tersebut didapatkan untuk soal **1.a.Sequence Number (raw): 258040667** dan  **1.b.Acknowledgment number (raw): 1044861039**.
 
 Lalu, pada soal diminta untuk mencari seq number (raw) dan ack number (raw) dari _respone_, karena _request_ berada pada paket nomor 147, sehingga kita mengetahui bahwa _respone_ berada dekat di bawah pake nomor 147 yaitu 149, dan di dapatkan hasilnya :
 
 ![image](https://github.com/aloybm/jarkom-it26/assets/100351038/5dae1800-45bb-48f4-b978-8962919c8ecd)
 
-Sehingga didapatkan jawaban untuk nomor 1.c.**Sequence Number (raw): 1044861039** dan 1.d.**Acknowledgment number (raw): 258040696**.
+Sehingga didapatkan jawaban untuk nomor **1.c.Sequence Number (raw): 1044861039** dan **1.d.Acknowledgment number (raw): 258040696**.
 
 ![image](https://github.com/aloybm/jarkom-it26/assets/100351038/3ca69e17-dfb5-47b1-8f6b-2a86c7e12f4f)
 
