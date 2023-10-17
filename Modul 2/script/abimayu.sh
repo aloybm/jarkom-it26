@@ -69,7 +69,7 @@ ln -s /etc/nginx/sites-available/jarkom /etc/nginx/sites-enabled/jarkom
 
 rm /etc/nginx/sites-enabled/default
 
-## 11
+# 11
 
 cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/abimanyu.it26.com.conf
 
@@ -89,7 +89,7 @@ echo -e '<VirtualHost *:80>
 a2ensite abimanyu.it26.com.conf
 
 
-## 12
+# 12
 
 echo -e '<VirtualHost *:80>
   ServerAdmin webmaster@localhost
@@ -107,7 +107,7 @@ echo -e '<VirtualHost *:80>
   CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>' > /etc/apache2/sites-available/abimanyu.it26.com.conf
 
-## 13
+# 13
 
 echo -e '<VirtualHost *:80>
   ServerAdmin webmaster@localhost
@@ -122,7 +122,7 @@ echo -e '<VirtualHost *:80>
 a2ensite parikesit.abimanyu.it26.com.conf
 
 
-## 14
+# 14
 
 echo -e '<VirtualHost *:80>
   ServerAdmin webmaster@localhost
@@ -146,7 +146,7 @@ echo -e '<VirtualHost *:80>
 </VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.it26.com.conf
 
 
-## 15
+# 15
 
 echo -e '<VirtualHost *:80>
   ServerAdmin webmaster@localhost
@@ -173,7 +173,7 @@ echo -e '<VirtualHost *:80>
 </VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.it26.com.conf
 
 
-##### 16
+# 16
 
 echo -e '<VirtualHost *:80>
   ServerAdmin webmaster@localhost
@@ -200,7 +200,7 @@ echo -e '<VirtualHost *:80>
   CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.it26.com.conf
 
-##### 17
+# 17
 
 echo -e '<VirtualHost *:14000 *:14400>
   ServerAdmin webmaster@localhost
@@ -235,7 +235,7 @@ Listen 14400
 
 a2ensite rjp.baratayuda.abimanyu.it26.com.conf
 
-##### 18
+# 18
 
 echo -e '<VirtualHost *:14000 *:14400>
   ServerAdmin webmaster@localhost
@@ -262,7 +262,7 @@ a2ensite rjp.baratayuda.abimanyu.it26.com.conf
 htpasswd -c -b /etc/apache2/.htpasswd Wayang baratayudait26
 
 
-##### 19
+# 19
 
 echo -e '<VirtualHost *:80>
     ServerAdmin webmaster@abimanyu.it26.com
@@ -279,7 +279,7 @@ apache2ctl configtest
 
 
 
-##### 20
+# 20
 
 a2enmod rewrite
 
