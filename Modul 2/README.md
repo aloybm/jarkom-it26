@@ -136,7 +136,7 @@ ping www.arjuna.it26.com -c 5
 ```
 #### Result
 
-![image](https://github.com/aloybm/jarkom-it26/assets/100351038/bfa1524b-3646-480f-a61b-2d090204c7c2)
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/3a18100c-6e2b-41cd-b585-43a593ce5343)
 
 
 ### Soal 3
@@ -416,6 +416,9 @@ lynx parikesit.abimanyu.it26.com/public/images/abimanyu.png
 
 #### Result
 ![image](https://github.com/aloybm/jarkom-it26/assets/100351038/a30fadf4-0bc8-47bc-ae74-408a899e5a5a)
+
+### Kendala Pengerjaan
+Kendala yang dialami adalah internet yang sering disconnect sehingga harus mengulang script, sehingga memakan waktu yang banyak dalam pengerjaan.
 
 
 
