@@ -322,6 +322,16 @@ zone "3.246.192.in-addr.arpa" {
 service bind9 restart
 service bind9 stop
 ```
+
+#### Werkudara
+```
+zone "abimanyu.it26.com" {
+        type slave;
+        masters { 192.246.2.2; };
+        file "/var/lib/bind/abimanyu.it26.com";
+}; > /etc/bind/named.conf.local
+```
+
 #### Testing
 ```
 service bind9 stop ## Yudhisitra
@@ -338,6 +348,120 @@ ping www.abimanyu.it26.com -c 5
 ### Soal 7
 Seperti yang kita tahu karena banyak sekali informasi yang harus diterima, buatlah subdomain khusus untuk perang yaitu baratayuda.abimanyu.yyy.com dengan alias www.baratayuda.abimanyu.yyy.com yang didelegasikan dari Yudhistira ke Werkudara dengan IP menuju ke Abimanyu dalam folder Baratayuda.
 
+
+Pada DNS Master kita perlu menambahkan `ns1     IN      A       192.173.2.2     ; IP Werkudara` agar mendapatkan authoritative terhadap Werkudara. Kita juga perlu mengaktifkan `allow-query { any; };` pada DNS Master.
+
+##### Yudhistira
+
+```
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     abimanyu.it26.com. root.abimanyu.it26.com. (
+                      2023101001        ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      abimanyu.it26.com.
+@       IN      A       192.246.3.4
+www     IN      CNAME   abimanyu.it26.com.
+parikesit       IN      A       192.246.3.4
+nsl     IN      A       192.246.2.3
+baratayuda      IN      NS      nsl
+www.baratayuda     IN      NS   nsl
+' >  /etc/bind/abimanyu/abimanyu.it26.com
+
+echo "options {
+    directory \"/var/cache/bind\";
+
+    // If there is a firewall between you and nameservers you want
+    // to talk to, you may need to fix the firewall to allow multiple
+    // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+    // If your ISP provided one or more IP addresses for stable
+    // nameservers, you probably want to use them as forwarders.
+    // Uncomment the following block, and insert the addresses replacing
+    // the all-0's placeholder.
+
+    // forwarders {
+    //      0.0.0.0;
+    // };
+
+    //========================================================================
+    // If BIND logs error messages about the root key being expired,
+    // you will need to update your keys.  See https://www.isc.org/bind-keys
+    //========================================================================
+    //dnssec-validation auto;
+
+    allow-query { any; };
+    auth-nxdomain no;
+    listen-on-v6 { any; };
+};" > /etc/bind/named.conf.options
+```
+##### Werkudara
+Pada DNS Slave Kita perlu untuk mengarahkan zone ke DNS Master agar authoritative tadi dapat jalan. Kita perlu mengaktifkan `allow-query { any; };` pada DNS Slave
+```
+zone "baratayuda.abimanyu.it26.com" {
+        type master;
+        file "/etc/bind/Baratayuda/baratayuda.abimanyu.it26.com";
+};
+' > /etc/bind/named.conf.local
+
+mkdir /etc/bind/Baratayuda
+touch /etc/bind/Baratayuda/baratayuda.abimanyu.it26.com
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     baratayuda.abimanyu.it26.com. root.baratayuda.abimanyu.it26.com. (
+                     2023101001         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      baratayuda.abimanyu.it26.com.
+@       IN      A       192.246.3.4
+www     IN      CNAME   baratayuda.abimanyu.it26.com.
+rjp     IN      A       192.246.3.4
+www.rjp IN      CNAME   rjp.baratayuda.abimanyu.it26.com.
+' > /etc/bind/Baratayuda/baratayuda.abimanyu.it26.com
+
+echo "options {
+    directory \"/var/cache/bind\";
+
+    // If there is a firewall between you and nameservers you want
+    // to talk to, you may need to fix the firewall to allow multiple
+    // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+    // If your ISP provided one or more IP addresses for stable
+    // nameservers, you probably want to use them as forwarders.
+    // Uncomment the following block, and insert the addresses replacing
+    // the all-0's placeholder.
+
+    // forwarders {
+    //      0.0.0.0;
+    // };
+
+    //========================================================================
+    // If BIND logs error messages about the root key being expired,
+    // you will need to update your keys.  See https://www.isc.org/bind-keys
+    //========================================================================
+    //dnssec-validation auto;
+
+    allow-query { any; };
+    auth-nxdomain no;
+    listen-on-v6 { any; };
+};" > /etc/bind/named.conf.options
+
+```
+
+
 #### Testing
 ```
 ping baratayuda.abimanyu.it26.com -c 5
@@ -351,6 +475,28 @@ ping www.baratayuda.abimanyu.it26.com -c 5
 
 ### Soal 8
 Untuk informasi yang lebih spesifik mengenai Ranjapan Baratayuda, buatlah subdomain melalui Werkudara dengan akses rjp.baratayuda.abimanyu.yyy.com dengan alias www.rjp.baratayuda.abimanyu.yyy.com yang mengarah ke Abimanyu.
+
+##### Werkudara
+```
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     baratayuda.abimanyu.it26.com. root.baratayuda.abimanyu.it26.com. (
+                     2023101001         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      baratayuda.abimanyu.it26.com.
+@       IN      A       192.246.3.4
+www     IN      CNAME   baratayuda.abimanyu.it26.com.
+rjp     IN      A       192.246.3.4
+www.rjp IN      CNAME   rjp.baratayuda.abimanyu.it26.com.
+' > /etc/bind/Baratayuda/baratayuda.abimanyu.it26.com
+```
 
 
 #### Testing
@@ -366,7 +512,68 @@ ping www.rjp.baratayuda.abimanyu.it26.com -c 5
 ### Soal 9
 Arjuna merupakan suatu Load Balancer Nginx dengan tiga worker (yang juga menggunakan nginx sebagai webserver) yaitu Prabakusuma, Abimanyu, dan Wisanggeni. Lakukan deployment pada masing-masing worker.
 
+##### Arjuna
+```
+echo 'upstream backend {
+  server 192.246.3.5:8001 ; # IP PrabuKusuma
+  server 192.246.3.4:8002 ; # IP Abimanyu
+  server 192.246.3.3:8003 ; # IP Wisanggeni
+}
 
+server {
+  listen 80;
+  server_name arjuna.it26.com www.arjuna.it26.com;
+
+  location / {
+    proxy_pass http://backend;
+  }
+}
+' > /etc/nginx/sites-available/jarkom
+
+ln -s /etc/nginx/sites-available/jarkom /etc/nginx/sites-enabled/jarkom
+
+rm /etc/nginx/sites-enabled/default
+
+service nginx restart
+```
+
+##### PrabuKusuma, Abimanyu, Wisanggeni
+```
+echo ' server {
+
+ 	listen 8001;
+
+ 	root /var/www/jarkom;
+
+ 	index index.php index.html index.htm;
+ 	server_name _;
+
+ 	location / {
+ 			try_files $uri $uri/ /index.php?$query_string;
+ 	}
+
+ 	# pass PHP scripts to FastCGI server
+ 	location ~ \.php$ {
+ 	include snippets/fastcgi-php.conf;
+ 	fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+ 	}
+
+ location ~ /\.ht {
+ 			deny all;
+ 	}
+
+ 	error_log /var/log/nginx/jarkom_error.log;
+ 	access_log /var/log/nginx/jarkom_access.log;
+ }' > /etc/nginx/sites-available/jarkom
+
+ln -s /etc/nginx/sites-available/jarkom /etc/nginx/sites-enabled/jarkom
+
+rm /etc/nginx/sites-enabled/default
+
+service nginx restart
+```
+
+####
 #### Testing
 ```
 lynx http://192.246.3.2
@@ -387,6 +594,7 @@ Kemudian gunakan algoritma Round Robin untuk Load Balancer pada Arjuna. Gunakan 
     - Prabakusuma:8001
     - Abimanyu:8002
     - Wisanggeni:8003
+
 
 #### Testing
 ```
