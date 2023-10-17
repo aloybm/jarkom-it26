@@ -42,8 +42,7 @@ $TTL    604800
 @       IN      NS      arjuna.it26.com.
 @       IN      A       192.246.2.2
 www     IN      CNAME   arjuna.it26.com.
-@       IN      AAAA    ::1
-' | tee /etc/bind/arjuna/arjuna.it26.com
+' > /etc/bind/arjuna/arjuna.it26.com
 
 
 mkdir /etc/bind/abimanyu
