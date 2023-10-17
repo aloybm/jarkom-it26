@@ -409,12 +409,13 @@ Karena website www.parikesit.abimanyu.yyy.com semakin banyak pengunjung dan bany
 
 #### Testing
 ```
+lynx parikesit.abimanyu.it26.com/public/images/abimanyu-student.jpg
 lynx parikesit.abimanyu.it26.com/public/images/not-abimanyu.png
-lynx parikesit.abimanyu.it25.com/public/images/abimanyu-student.jpg
 lynx parikesit.abimanyu.it26.com/public/images/abimanyu.png
-lynx parikesit.abimanyu.it26.com/public/images/notabimanyujustmuseum.177013
 ```
 
 #### Result
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/a30fadf4-0bc8-47bc-ae74-408a899e5a5a)
+
 
 
