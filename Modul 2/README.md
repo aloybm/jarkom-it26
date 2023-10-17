@@ -129,6 +129,39 @@ Lalu kita test dengan ping ke google.com
 ### Soal 2
 Dengan cara yang sama seperti soal nomor 2, buatlah website utama dengan akses ke arjuna.yyy.com dan alias www.arjuna.yyy.com.
 
+Kita harus melakukan set up pada DNS Master, yaitu Yudhistira
+```
+echo 'zone "arjuna.it26.com" {
+        type master;
+        notify yes;
+        also-notify { 192.246.2.3; };
+        allow-transfer { 192.246.2.3; };
+        file "/etc/bind/arjuna/arjuna.it26.com";
+}; > /etc/bind/named.conf.local
+
+mkdir /etc/bind/arjuna
+touch /etc/bind/arjuna/arjuna.it26.com
+
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     arjuna.it26.com. root.arjuna.it26.com. (
+                        2023101001      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      arjuna.it26.com.
+@       IN      A       192.246.2.2
+www     IN      CNAME   arjuna.it26.com.
+' > /etc/bind/arjuna/arjuna.it26.com
+
+service bind9 restarr
+```
+
 #### Testing
 ```
 ping arjuna.it26.com -c 5
@@ -142,6 +175,38 @@ ping www.arjuna.it26.com -c 5
 ### Soal 3
 Dengan cara yang sama seperti soal nomor 2, buatlah website utama dengan akses ke abimanyu.yyy.com dan alias www.abimanyu.yyy.com.
 
+Kita harus melakukan set up terhadap DNS Master
+
+```
+zone "abimanyu.it26.com" {
+        type master;
+        notify yes;
+        also-notify { 192.246.2.3; };
+        allow-transfer { 192.246.2.3; };
+        file "/etc/bind/abimanyu/abimanyu.it26.com";
+};
+
+mkdir /etc/bind/abimanyu
+touch /etc/bind/abimanyu/abimanyu.it26.com
+
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     abimanyu.it26.com. root.abimanyu.it26.com. (
+                      2023101001        ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      abimanyu.it26.com.
+@       IN      A       192.246.3.4
+www     IN      CNAME   abimanyu.it26.com.
+' >  /etc/bind/abimanyu/abimanyu.it26.com
+
+```
 ### Testing
 ```
 ping abimanyu.it26.com -c 5
@@ -155,6 +220,28 @@ ping www.abimanyu.it26.com -c 5
 ### Soal 4 
 Kemudian, karena terdapat beberapa web yang harus di-deploy, buatlah subdomain parikesit.abimanyu.yyy.com yang diatur DNS-nya di Yudhistira dan mengarah ke Abimanyu.
 
+Kita perlu untuk menset up. Untuk subdomain, kita perlu menambahkan parikesit dengan type A yang mengarah langsung ke IP Abimanyu.
+
+```
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     abimanyu.it26.com. root.abimanyu.it26.com. (
+                      2023101001        ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      abimanyu.it26.com.
+@       IN      A       192.246.3.4
+www     IN      CNAME   abimanyu.it26.com.
+parikesit       IN      A       192.246.3.4
+
+' >  /etc/bind/abimanyu/abimanyu.it26.com
+```
 #### Testing
 ```
 ping parikesit.abimanyu.it26.com -c 5
@@ -167,6 +254,32 @@ ping parikesit.abimanyu.it26.com -c 5
 ### Soal 5
 Buat juga reverse domain untuk domain utama. (Abimanyu saja yang direverse)
 
+Untuk reverse domain Abimanyu, maka kita harus melakukan set up dahulu.
+Berarti domain yang awalnya `192.246.3.4` di reverse menjadi `4.3.246.192`
+
+#### Yudhistira
+```
+zone "3.246.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/abimanyu/3.246.192.in-addr.arpa";
+};
+' > /etc/bind/named.conf.local
+
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     abimanyu.it26.com. root.abimanyu.it26.com. (
+                      2023101001        ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+3.246.192.in-addr.arpa. IN      NS      abimanyu.it26.com.
+4       IN      PTR     abimanyu.it26.com'  >  /etc/bind/abimanyu/3.246.192.in-addr.arpa
+```
 #### Testing
 ```
 host -t PTR 192.246.3.4 
@@ -179,6 +292,36 @@ host -t PTR 192.246.3.4
 ### Soal 6
 Agar dapat tetap dihubungi ketika DNS Server Yudhistira bermasalah, buat juga Werkudara sebagai DNS Slave untuk domain utama.
 
+Kita harus melakukan setup pada DNS Master dan DNS Slave (Werkudara)
+
+#### Yudhistira
+```
+echo 'zone "arjuna.it26.com" {
+        type master;
+        notify yes;
+        also-notify { 192.246.2.3; };
+        allow-transfer { 192.246.2.3; };
+        file "/etc/bind/arjuna/arjuna.it26.com";
+};
+zone "abimanyu.it26.com" {
+        type master;
+        notify yes;
+        also-notify { 192.246.2.3; };
+        allow-transfer { 192.246.2.3; };
+        file "/etc/bind/abimanyu/abimanyu.it26.com";
+};
+
+zone "3.246.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/abimanyu/3.246.192.in-addr.arpa";
+};
+' > /etc/bind/named.conf.local
+
+// Jangan lupa restart lalu stop bind9, untuk melakukan testing slave
+
+service bind9 restart
+service bind9 stop
+```
 #### Testing
 ```
 service bind9 stop ## Yudhisitra
