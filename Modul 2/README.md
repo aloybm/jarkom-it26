@@ -127,7 +127,8 @@ Lalu kita test dengan ping ke google.com
 `ping google.com`
 
 ### Soal 2
-Dengan cara yang sama seperti soal nomor 2, buatlah website utama dengan akses ke abimanyu.yyy.com dan alias www.abimanyu.yyy.com.
+Dengan cara yang sama seperti soal nomor 2, buatlah website utama dengan akses ke arjuna.yyy.com dan alias www.arjuna.yyy.com.
+
 
 
 ### Soal 3
