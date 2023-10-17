@@ -203,6 +203,7 @@ ping www.baratayuda.abimanyu.it26.com -c 5
 
 #### Result
 
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/baa7adeb-0cc5-43fc-9e3c-a71bfd464599)
 
 
 ### Soal 8
@@ -211,11 +212,13 @@ Untuk informasi yang lebih spesifik mengenai Ranjapan Baratayuda, buatlah subdom
 
 #### Testing
 ```
+ping rjp.baratayuda.abimanyu.it26.com -c 5
+ping www.rjp.baratayuda.abimanyu.it26.com -c 5
 ```
 
 #### Result
 
-
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/a7fd7544-0d0f-4591-94ba-1db77f90dc90)
 
 ### Soal 9
 Arjuna merupakan suatu Load Balancer Nginx dengan tiga worker (yang juga menggunakan nginx sebagai webserver) yaitu Prabakusuma, Abimanyu, dan Wisanggeni. Lakukan deployment pada masing-masing worker.
@@ -223,9 +226,17 @@ Arjuna merupakan suatu Load Balancer Nginx dengan tiga worker (yang juga menggun
 
 #### Testing
 ```
+lynx http://192.246.3.2
+lynx http://192.246.3.5
+lynx http://192.246.3.4
+lynx http://192.246.3.3 
 ```
 
 #### Result
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/8220b24e-51bc-4592-964c-7a8e0c2eca9f)
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/16cbfb4e-c133-4bd4-bf2e-f78b5c52c384)
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/9ec87c86-520c-4a65-8e38-3a8d7be42e10)
+
 
 
 ### Soal 10
@@ -236,10 +247,15 @@ Kemudian gunakan algoritma Round Robin untuk Load Balancer pada Arjuna. Gunakan 
 
 #### Testing
 ```
+lynx http://192.246.3.5:8001 
+lynx http://192.246.3.4:8002
+lynx http://192.246.3.3:8003 
 ```
 
 #### Result
-
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/8220b24e-51bc-4592-964c-7a8e0c2eca9f)
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/16cbfb4e-c133-4bd4-bf2e-f78b5c52c384)
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/9ec87c86-520c-4a65-8e38-3a8d7be42e10)
 
 
 ### Soal 11
@@ -247,20 +263,24 @@ Selain menggunakan Nginx, lakukan konfigurasi Apache Web Server pada worker Abim
 
 #### Testing
 ```
+lynx abimanyu.it26.com
 ```
 
 #### Result
 
-
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/b10fa36d-4044-4e34-946d-6161026aebb1)
 
 ### Soal 12
 Setelah itu ubahlah agar url www.abimanyu.yyy.com/index.php/home menjadi www.abimanyu.yyy.com/home.
 
 #### Testing
 ```
+lynx abimanyu.it26.com/home
 ```
 
 #### Result
+
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/dd88d144-d1d0-4baf-9880-514e9216cff1)
 
 
 ### Soal 13
@@ -268,9 +288,11 @@ Selain itu, pada subdomain www.parikesit.abimanyu.yyy.com, DocumentRoot disimpan
 
 #### Testing
 ```
+lynx parikesit.abimanyu.it26.com
 ```
 
 #### Result
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/f7d25ef7-5ae3-4fce-913f-5939da81603e)
 
 
 ### Soal 14
@@ -278,9 +300,21 @@ Pada subdomain tersebut folder /public hanya dapat melakukan directory listing s
 
 #### Testing
 ```
+lynx parikesit.abimanyu.it26.com/public
+lynx parikesit.abimanyu.it26.com/secret
 ```
 
 #### Result
+`
+lynx parikesit.abimanyu.it26.com/public
+`
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/8ef451a5-4536-429b-8dcf-ce92db58193a)
+
+`
+lynx parikesit.abimanyu.it26.com/secret
+`
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/b86abd9f-93e1-4cd3-9d6c-33f0cf722ba1)
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/54748964-0ecb-41e1-ae49-48bf49e23124)
 
 
 ### Soal 15
@@ -288,10 +322,18 @@ Buatlah kustomisasi halaman error pada folder /error untuk mengganti error kode 
 
 #### Testing
 ```
+lynx parikesit.abimanyu.it26.com/testingerror
+lynx parikesit.abimanyu.it26.com/secret
 ```
 
 #### Result
+##### 404 Not Found 
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/70e214a7-76f6-4822-8d26-b317c8a4ba27)
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/7e909850-3024-4a16-88ed-c978dee0ad1b)
 
+##### 403 Forbidden
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/b86abd9f-93e1-4cd3-9d6c-33f0cf722ba1)
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/54748964-0ecb-41e1-ae49-48bf49e23124)
 
 ### Soal 16
 Buatlah suatu konfigurasi virtual host agar file asset www.parikesit.abimanyu.yyy.com/public/js menjadi 
@@ -299,9 +341,12 @@ www.parikesit.abimanyu.yyy.com/js
 
 #### Testing
 ```
+lynx parikesit.abimanyu.it26.com/js
 ```
 
 #### Result
+
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/13598d57-dbe1-41a8-aa39-7c33a97f1285)
 
 
 ### Soal 17
@@ -309,9 +354,15 @@ Agar aman, buatlah konfigurasi agar www.rjp.baratayuda.abimanyu.yyy.com hanya da
 
 #### Testing
 ```
+lynx rjp.baratayuda.abimanyu.it26.com:14000
+lynx rjp.baratayuda.abimanyu.it26.com:14400
 ```
 
 #### Result
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/b03ead4f-4ae0-4bd6-97eb-a2c1dd9eecf8)
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/9e2e2505-c3d0-4fbf-a0a2-d4744cf53913)
+
+
 
 
 ### Soal 18
@@ -319,9 +370,26 @@ Untuk mengaksesnya buatlah autentikasi username berupa “Wayang” dan password
 
 #### Testing
 ```
+lynx rjp.baratayuda.abimanyu.it26.com:14000
+lynx rjp.baratayuda.abimanyu.it26.com:14400
+
+username : Wayang
+pass	: baratayudait26
 ```
 
 #### Result
+`
+lynx rjp.baratayuda.abimanyu.it26.com:14000
+`
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/b03ead4f-4ae0-4bd6-97eb-a2c1dd9eecf8)
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/abdac461-1786-4976-ae39-459fac23e6a8)
+
+`
+lynx rjp.baratayuda.abimanyu.it26.com:14400
+`
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/9e2e2505-c3d0-4fbf-a0a2-d4744cf53913)
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/f57f0ec0-271f-4dd3-96fd-3ee76f1b87ff)
+
 
 
 ### Soal 19
@@ -329,7 +397,9 @@ Buatlah agar setiap kali mengakses IP dari Abimanyu akan secara otomatis dialihk
 
 #### Testing
 ```
+lynx 192.246.3.4
 ```
+![image](https://github.com/aloybm/jarkom-it26/assets/100351038/0ea0523b-e3fa-460b-8dbd-7f65fd433aff)
 
 #### Result
 
@@ -339,6 +409,10 @@ Karena website www.parikesit.abimanyu.yyy.com semakin banyak pengunjung dan bany
 
 #### Testing
 ```
+lynx parikesit.abimanyu.it26.com/public/images/not-abimanyu.png
+lynx parikesit.abimanyu.it25.com/public/images/abimanyu-student.jpg
+lynx parikesit.abimanyu.it26.com/public/images/abimanyu.png
+lynx parikesit.abimanyu.it26.com/public/images/notabimanyujustmuseum.177013
 ```
 
 #### Result
