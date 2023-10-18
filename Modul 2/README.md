@@ -595,6 +595,45 @@ Kemudian gunakan algoritma Round Robin untuk Load Balancer pada Arjuna. Gunakan 
     - Abimanyu:8002
     - Wisanggeni:8003
 
+##### Arjuna (Load Balancing)
+```
+echo 'upstream backend {
+  server 192.246.3.5:8001 ; # IP PrabuKusuma
+  server 192.246.3.4:8002 ; # IP Abimanyu
+  server 192.246.3.3:8003 ; # IP Wisanggeni
+}
+```
+
+##### PrabuKusuma, Abimanyu, Wisanggeni
+X adlaah port yang ditentukan sesuai worker
+```
+echo ' server {
+
+ 	listen 800X;
+
+ 	root /var/www/jarkom;
+
+ 	index index.php index.html index.htm;
+ 	server_name _;
+
+ 	location / {
+ 			try_files $uri $uri/ /index.php?$query_string;
+ 	}
+
+ 	# pass PHP scripts to FastCGI server
+ 	location ~ \.php$ {
+ 	include snippets/fastcgi-php.conf;
+ 	fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+ 	}
+
+ location ~ /\.ht {
+ 			deny all;
+ 	}
+
+ 	error_log /var/log/nginx/jarkom_error.log;
+ 	access_log /var/log/nginx/jarkom_access.log;
+ }' > /etc/nginx/sites-available/jarkom
+```
 
 #### Testing
 ```
@@ -611,6 +650,25 @@ lynx http://192.246.3.3:8003
 
 ### Soal 11
 Selain menggunakan Nginx, lakukan konfigurasi Apache Web Server pada worker Abimanyu dengan web server www.abimanyu.yyy.com. Pertama dibutuhkan web server dengan DocumentRoot pada /var/www/abimanyu.yyy
+##### Abimanyu
+```
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/abimanyu.it26.com.conf
+
+rm /etc/apache2/sites-available/000-default.conf
+
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/abimanyu.it26
+
+  ServerName abimanyu.it26.com
+  ServerAlias www.abimanyu.it26.com
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/abimanyu.it26.com.conf
+
+a2ensite abimanyu.it26.com.conf
+```
 
 #### Testing
 ```
@@ -623,7 +681,24 @@ lynx abimanyu.it26.com
 
 ### Soal 12
 Setelah itu ubahlah agar url www.abimanyu.yyy.com/index.php/home menjadi www.abimanyu.yyy.com/home.
+##### Abimanyu
+```
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/abimanyu.it26
+  ServerName abimanyu.it26.com
+  ServerAlias www.abimanyu.it26.com
 
+  <Directory /var/www/abimanyu.it26/index.php/home>
+          Options +Indexes
+  </Directory>
+
+  Alias "/home" "/var/www/abimanyu.it26/index.php/home"
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/abimanyu.it26.com.conf
+```
 #### Testing
 ```
 lynx abimanyu.it26.com/home
@@ -636,6 +711,20 @@ lynx abimanyu.it26.com/home
 
 ### Soal 13
 Selain itu, pada subdomain www.parikesit.abimanyu.yyy.com, DocumentRoot disimpan pada /var/www/parikesit.abimanyu.yyy
+##### Abimanyu
+```
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/parikesit.abimanyu.it26
+  ServerName parikesit.abimanyu.it26.com
+  ServerAlias www.parikesit.abimanyu.it26.com
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.it26.com.conf
+
+a2ensite parikesit.abimanyu.it26.com.conf
+```
 
 #### Testing
 ```
@@ -649,6 +738,29 @@ lynx parikesit.abimanyu.it26.com
 ### Soal 14
 Pada subdomain tersebut folder /public hanya dapat melakukan directory listing sedangkan pada folder /secret tidak dapat diakses (403 Forbidden).
 
+##### Abimanyu
+```
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/parikesit.abimanyu.it26
+  ServerName parikesit.abimanyu.it26.com
+  ServerAlias www.parikesit.abimanyu.it26.com
+
+  <Directory /var/www/parikesit.abimanyu.it26/public>
+          Options +Indexes
+  </Directory>
+
+  <Directory /var/www/parikesit.abimanyu.it26/secret>
+          Options -Indexes
+  </Directory>
+
+  Alias "/public" "/var/www/parikesit.abimanyu.it26/public"
+  Alias "/secret" "/var/www/parikesit.abimanyu.it26/secret"
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.it26.com.conf
+```
 #### Testing
 ```
 lynx parikesit.abimanyu.it26.com/public
@@ -671,6 +783,32 @@ lynx parikesit.abimanyu.it26.com/secret
 ### Soal 15
 Buatlah kustomisasi halaman error pada folder /error untuk mengganti error kode pada Apache. Error kode yang perlu diganti adalah 404 Not Found dan 403 Forbidden.
 
+#####  Abimanyu
+```
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/parikesit.abimanyu.it26
+  ServerName parikesit.abimanyu.it26.com
+  ServerAlias www.parikesit.abimanyu.it26.com
+
+  <Directory /var/www/parikesit.abimanyu.it26/public>
+          Options +Indexes
+  </Directory>
+
+  <Directory /var/www/parikesit.abimanyu.it26/secret>
+          Options -Indexes
+  </Directory>
+
+  Alias "/public" "/var/www/parikesit.abimanyu.it26/public"
+  Alias "/secret" "/var/www/parikesit.abimanyu.it26/secret"
+
+  ErrorDocument 404 /error/404.html
+  ErrorDocument 403 /error/403.html
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.it26.com.conf
+```
 #### Testing
 ```
 lynx parikesit.abimanyu.it26.com/testingerror
@@ -690,6 +828,34 @@ lynx parikesit.abimanyu.it26.com/secret
 Buatlah suatu konfigurasi virtual host agar file asset www.parikesit.abimanyu.yyy.com/public/js menjadi 
 www.parikesit.abimanyu.yyy.com/js 
 
+##### Abimanyu
+```
+
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/parikesit.abimanyu.it26
+  ServerName parikesit.abimanyu.it26.com
+  ServerAlias www.parikesit.abimanyu.it26.com
+
+  <Directory /var/www/parikesit.abimanyu.it26/public>
+          Options +Indexes
+  </Directory>
+
+  <Directory /var/www/parikesit.abimanyu.it26/secret>
+          Options -Indexes
+  </Directory>
+
+  Alias "/public" "/var/www/parikesit.abimanyu.it26/public"
+  Alias "/secret" "/var/www/parikesit.abimanyu.it26/secret"
+  Alias "/js" "/var/www/parikesit.abimanyu.it26/public/js"
+
+  ErrorDocument 404 /error/404.html
+  ErrorDocument 403 /error/403.html
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.it26.com.conf
+```
 #### Testing
 ```
 lynx parikesit.abimanyu.it26.com/js
@@ -703,6 +869,41 @@ lynx parikesit.abimanyu.it26.com/js
 ### Soal 17
 Agar aman, buatlah konfigurasi agar www.rjp.baratayuda.abimanyu.yyy.com hanya dapat diakses melalui port 14000 dan 14400.
 
+##### Abimanyu
+```
+echo -e '<VirtualHost *:14000 *:14400>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/rjp.baratayuda.abimanyu.it26
+  ServerName rjp.baratayuda.abimanyu.it26.com
+  ServerAlias www.rjp.baratayuda.abimanyu.it26.com
+
+  ErrorDocument 404 /error/404.html
+  ErrorDocument 403 /error/403.html
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/rjp.baratayuda.abimanyu.it26.com.conf
+
+echo -e '# If you just change the port or add more ports here, you will likely also
+# have to change the VirtualHost statement in
+# /etc/apache2/sites-enabled/000-default.conf
+
+Listen 80
+Listen 14000
+Listen 14400
+
+<IfModule ssl_module>
+        Listen 443
+</IfModule>
+
+<IfModule mod_gnutls.c>
+        Listen 443
+</IfModule>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet' > /etc/apache2/ports.conf
+
+a2ensite rjp.baratayuda.abimanyu.it26.com.conf
+```
 #### Testing
 ```
 lynx rjp.baratayuda.abimanyu.it26.com:14000
@@ -718,7 +919,32 @@ lynx rjp.baratayuda.abimanyu.it26.com:14400
 
 ### Soal 18
 Untuk mengaksesnya buatlah autentikasi username berupa “Wayang” dan password “baratayudayyy” dengan yyy merupakan kode kelompok. Letakkan DocumentRoot pada /var/www/rjp.baratayuda.abimanyu.yyy.
+##### Abimanyu
+```
+echo -e '<VirtualHost *:14000 *:14400>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/rjp.baratayuda.abimanyu.it26
+  ServerName rjp.baratayuda.abimanyu.it26.com
+  ServerAlias www.rjp.baratayuda.abimanyu.it26.com
 
+  <Directory /var/www/rjp.baratayuda.abimanyu.it26>
+          AuthType Basic
+          AuthName "Restricted Content"
+          AuthUserFile /etc/apache2/.htpasswd
+          Require valid-user
+  </Directory>
+
+  ErrorDocument 404 /error/404.html
+  ErrorDocument 403 /error/403.html
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/rjp.baratayuda.abimanyu.it26.com.conf
+
+a2ensite rjp.baratayuda.abimanyu.it26.com.conf
+
+htpasswd -c -b /etc/apache2/.htpasswd Wayang baratayudait26
+```
 #### Testing
 ```
 lynx rjp.baratayuda.abimanyu.it26.com:14000
@@ -746,6 +972,20 @@ lynx rjp.baratayuda.abimanyu.it26.com:14400
 ### Soal 19
 Buatlah agar setiap kali mengakses IP dari Abimanyu akan secara otomatis dialihkan ke www.abimanyu.yyy.com (alias)
 
+##### Abimanyu
+```
+echo -e '<VirtualHost *:80>
+    ServerAdmin webmaster@abimanyu.it26.com
+    DocumentRoot /var/www/html
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    Redirect / http://www.abimanyu.it26.com/
+</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+
+apache2ctl configtest
+```
 #### Testing
 ```
 lynx 192.246.3.4
@@ -758,6 +998,46 @@ lynx 192.246.3.4
 ### Soal 20
 Karena website www.parikesit.abimanyu.yyy.com semakin banyak pengunjung dan banyak gambar gambar random, maka ubahlah request gambar yang memiliki substring “abimanyu” akan diarahkan menuju abimanyu.png
 
+##### Abimanyu
+```
+a2enmod rewrite
+
+echo 'RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/public/images/(.*)(abimanyu)(.*\.(png|jpg))
+RewriteCond %{REQUEST_URI} !/public/images/abimanyu.png
+RewriteRule abimanyu http://parikesit.abimanyu.it26.com/public/images/abimanyu.png$1 [L,R=301]' > /var/www/parikesit.abimanyu.it26/.htaccess
+
+echo -e '<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/parikesit.abimanyu.it26
+
+  ServerName parikesit.abimanyu.it26.com
+  ServerAlias www.parikesit.abimanyu.it26.com
+
+  <Directory /var/www/parikesit.abimanyu.it26/public>
+          Options +Indexes
+  </Directory>
+
+  <Directory /var/www/parikesit.abimanyu.it26/secret>
+          Options -Indexes
+  </Directory>
+
+  <Directory /var/www/parikesit.abimanyu.it26>
+          Options +FollowSymLinks -Multiviews
+          AllowOverride All
+  </Directory>
+
+  Alias "/public" "/var/www/parikesit.abimanyu.it26/public"
+  Alias "/secret" "/var/www/parikesit.abimanyu.it26/secret"
+  Alias "/js" "/var/www/parikesit.abimanyu.it26/public/js"
+
+  ErrorDocument 404 /error/404.html
+  ErrorDocument 403 /error/403.html
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/parikesit.abimanyu.it26.com.conf
+```
 #### Testing
 ```
 lynx parikesit.abimanyu.it26.com/public/images/abimanyu-student.jpg
