@@ -701,7 +701,7 @@ ab -n 200 -c 10 http://www.granz.channel.it26.com/
 
 **Grafik**
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/48104721-c2a1-4cd5-860b-f40a8f253a47)
+![Graphic of Y  #_sec  (mean) vs Worker](https://github.com/aloybm/jarkom-it26/assets/103870239/e62364e5-6166-4ff9-a85d-544b225e2b6a)
 
 ## Soal 10
 > Selanjutnya coba tambahkan konfigurasi autentikasi di LB dengan dengan kombinasi username: “netics” dan password: “ajkyyy”, dengan yyy merupakan kode kelompok. Terakhir simpan file “htpasswd” nya di /etc/nginx/rahasisakita/ 
@@ -796,7 +796,7 @@ lynx www.granz.channel.it26.com/its
 ## Soal 12
 > Selanjutnya LB ini hanya boleh diakses oleh client dengan IP [Prefix IP].3.69, [Prefix IP].3.70, [Prefix IP].4.167, dan [Prefix IP].4.168. 
 
-Sebelum mengerjakan perlu untuk melakukan [setup](#setup_di_awal) terlebih dahulu. Setelah itu, Kami hanya menambahkan beberapa konfigurasi di nginx sebagai berikut 
+Sebelum mengerjakan perlu untuk melakukan [setup](#setup-di-awal) terlebih dahulu. Setelah itu, Kami hanya menambahkan beberapa konfigurasi di nginx sebagai berikut 
 
 ### Script
 
@@ -871,7 +871,7 @@ Lakukan `stop` dan `start` ulang pada node `Richter`
 ## Soal 13
 > Semua data yang diperlukan, diatur pada Denken dan harus dapat diakses oleh Frieren, Flamme, dan Fern. (13)
 
-Sebelum mengerjakan perlu untuk melakukan [setup](#setup_di_awal) terlebih dahulu. Setelah itu kita buka ``Database Server`` nya yaitu ``Denken`` dan lakukan konfigurasi sebagai berikut
+Sebelum mengerjakan perlu untuk melakukan [setup](#setup-di-awal) terlebih dahulu. Setelah itu kita buka ``Database Server`` nya yaitu ``Denken`` dan lakukan konfigurasi sebagai berikut
 
 ### Script
 ```sh
@@ -929,7 +929,7 @@ mariadb --host=192.246.2.1 --port=3306 --user=kelompokit26 --password=passwordit
 ## Soal 14
 > Frieren, Flamme, dan Fern memiliki Granz Channel sesuai dengan quest guide berikut. Jangan lupa melakukan instalasi PHP8.0 dan Composer 
 
-Sebelum mengerjakan perlu untuk melakukan [setup](#setup_di_awal) terlebih dahulu. Setelah itu, lakukan konfigurasi lagi sebagai berikut
+Sebelum mengerjakan perlu untuk melakukan [setup](#setup-di-awal) terlebih dahulu. Setelah itu, lakukan konfigurasi lagi sebagai berikut
 
 ### Script
 Lakukan install composer
@@ -1154,7 +1154,7 @@ Terdapat error dalam pengiriman sebanyak 100 request. Karena satu worker saja ti
 ## Soal 18
 > Untuk memastikan ketiganya bekerja sama secara adil untuk mengatur Granz Channel maka implementasikan Proxy Bind pada Eisen untuk mengaitkan IP dari Frieren, Flamme, dan Fern. 
 
-Sebelum mengerjakan perlu untuk melakukan [setup](#setup_di_awal) terlebih dahulu. Setelah itu, karena hanya diberikan perintah ketiga ``worker`` berjalan secara adil, kami memberikan implementasi dari ``Load Balancing`` karena sesuai dengan definisi nya yaitu membagi rata beban kerja. Maka dari itu, berikut merupakan konfigurasi ``nginx``
+Sebelum mengerjakan perlu untuk melakukan [setup](#setup-di-awal) terlebih dahulu. Setelah itu, karena hanya diberikan perintah ketiga ``worker`` berjalan secara adil, kami memberikan implementasi dari ``Load Balancing`` karena sesuai dengan definisi nya yaitu membagi rata beban kerja. Maka dari itu, berikut merupakan konfigurasi ``nginx``
 
 ### Script
 ```sh
@@ -1384,5 +1384,5 @@ Jika ditambahkan Algoritma ``Load Balancing Least-connection``. Hasil yang didap
 ![20](https://github.com/aloybm/jarkom-it26/assets/103870239/6965bfdd-d7f9-4f66-98f1-9bcd90950e3e)
 
 
-Kesimpulannnya, algoritma ``Least-connection`` dapat berkerja dengan baik
+Kesimpulannnya, algoritma ``Least-connection`` dapat berkerja dengan baik.
 
