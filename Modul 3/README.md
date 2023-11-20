@@ -617,18 +617,19 @@ ab -n 1000 -c 100 http://www.granz.channel.it26.com/
 
 dan akan mendapatkan hasil seperti berikut 
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/024a3bca-87d7-4fc5-a94f-0d345f8c3c90)
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/95ba7ba1-2a9f-4fff-bc9a-44011440445a)
 
-dan waktu yang dihasilkan adalah  ``Requests per second:    269.06 [#/sec] (mean)`` serta yang dibutuhkan adalah sebagai berikut 
+dan waktu yang dihasilkan adalah  ``Requests per second:    299.71 [#/sec] (mean)`` serta sebagai berikut, 
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/6a893591-aeac-4976-951a-189771340277)
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/a563da09-0ffa-4527-9f0f-b083c35667bf)
+
 
 ## Soal 8
 > Karena diminta untuk menuliskan grimoire, buatlah analisis hasil testing dengan 200 request dan 10 request/second masing-masing algoritma Load Balancer dengan ketentuan sebagai berikut: 1. Nama Algoritma Load Balancer; 2. Report hasil testing pada Apache Benchmark; 3.Grafik request per second untuk masing masing algoritma; 4. Analisis
 
-Sebelum mengerjakan perlu untuk melakukan [setup](#setup_di_awal) terlebih dahulu. Selebihnya untuk konfigurasinya sama dengan [Soal 7](#Soal-7)
+Sebelum mengerjakan perlu untuk melakukan [setup](#setup-di-awal) terlebih dahulu. Selebihnya untuk konfigurasinya sama dengan [Soal 7](#Soal-7)
 
-Untuk laporan ``grimoire`` nya kami membuatnya di google.docs pada [link](https://docs.google.com/document/d/1mjKvsNKzQ8XagdoAB8i9nLP6MNEwcRq2ucCuLPb50F0/edit?usp=sharing) ini.
+Untuk laporan ``grimoire`` nya kami membuatnya di google.docs pada [link](YYYY) ini.
 
 ### Script
 Jalankan command berikut pada client ``Revolte``
@@ -640,28 +641,34 @@ ab -n 200 -c 10 http://www.granz.channel.it26.com/
 
 **Round Robin**
 
-![Screenshot (1015)](https://github.com/Raf/go-gin-clean-template/assets/92671053/24ed0a1b-11a5-4aea-aed2-6ea179e6b477)
+![Result_Round Robin](https://github.com/aloybm/jarkom-it26/assets/103870239/e0e98802-20b0-4860-b613-afa620e0c617)
+
+
 
 **Least-connection**
 
-![Screenshot (1019)](https://github.com/Raf/go-gin-clean-template/assets/92671053/eabe0ec0-d215-465d-8096-31473dc7c962)
+![Result_Least Connection](https://github.com/aloybm/jarkom-it26/assets/103870239/af99777f-aa92-4f88-910c-42fdaa22437a)
+
 
 **IP Hash**
 
-![Screenshot (1020)](https://github.com/Raf/go-gin-clean-template/assets/92671053/4f03715c-7da8-470a-87b1-7763c489ec78)
+![Result_IP Hash](https://github.com/aloybm/jarkom-it26/assets/103870239/e8b8d056-a533-4cbe-85be-9b72e0ee7d19)
+
 
 **Generic Hash**
 
-![Screenshot (1021)](https://github.com/Raf/go-gin-clean-template/assets/92671053/37b8d309-9917-4275-a441-2ca838fcb6b7)
+![Result_Generic Hash](https://github.com/aloybm/jarkom-it26/assets/103870239/1c311c8d-1212-43fd-814b-d9e26c189a8b)
+
 
 **Grafik**
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/5551618b-fb27-4028-915d-f5beff5616d3)
+![Request Per Second vs  Algorythm](https://github.com/aloybm/jarkom-it26/assets/103870239/ad649ffc-fbb4-47b5-a59b-3cfe3a718235)
+
 
 ## Soal 9
 > Dengan menggunakan algoritma Round Robin, lakukan testing dengan menggunakan 3 worker, 2 worker, dan 1 worker sebanyak 100 request dengan 10 request/second, kemudian tambahkan grafiknya pada grimoire. (9)
 
-Sebelum mengerjakan perlu untuk melakukan [setup](#setup_di_awal) terlebih dahulu. Setelah melakukan setup pada node ``Eisen`` sekarang lakukan testing pada load balancer yang telah dibuat sebelumnya. Yang menjadi pembeda adalah kita harus melakukan testing menggunakan ``1 worker``, ``2 worker``, dan ``3 worker``. 
+Sebelum mengerjakan perlu untuk melakukan [setup](#setup-di-awal) terlebih dahulu. Setelah melakukan setup pada node ``Eisen`` sekarang lakukan testing pada load balancer yang telah dibuat sebelumnya. Yang menjadi pembeda adalah kita harus melakukan testing menggunakan ``1 worker``, ``2 worker``, dan ``3 worker``. 
 
 ### Script
 Jalankan command berikut pada client ``Revolte``
@@ -673,21 +680,24 @@ ab -n 200 -c 10 http://www.granz.channel.it26.com/
 
 **3 Worker**
 
-![Screenshot (1022)](https://github.com/Raf/go-gin-clean-template/assets/92671053/a05e2b8f-6a98-4283-9c1a-581a1f7c2811)
+![3_Worker](https://github.com/aloybm/jarkom-it26/assets/103870239/47c8d84c-a193-432a-a239-59ea3894c632)
 
-> Request per second 303.87 [#/sec] (mean)
+
+> Request per second 1161.95 [#/sec] (mean)
 
 **2 Worker**
 
-![Screenshot (1023)](https://github.com/Raf/go-gin-clean-template/assets/92671053/9d4dc1ba-9a8a-4203-9ed8-a201e2b488be)
+![2_Worker](https://github.com/aloybm/jarkom-it26/assets/103870239/d8e63799-b4b2-4fe7-924d-4174acd1e6da)
 
-> Request per second 336.77 [#/sec] (mean)
+
+> Request per second 1297.52 [#/sec] (mean)
 
 **1 Worker**
 
-![Screenshot (1024)](https://github.com/Raf/go-gin-clean-template/assets/92671053/bd9eab33-0d57-4244-a544-810e6910823b)
+![1_Worker](https://github.com/aloybm/jarkom-it26/assets/103870239/771849a1-2493-47c8-9093-2cb03f033b5e)
 
-> Request per second 393.40 [#/sec] (mean)
+
+> Request per second 1410.20 [#/sec] (mean)
 
 **Grafik**
 
@@ -696,7 +706,7 @@ ab -n 200 -c 10 http://www.granz.channel.it26.com/
 ## Soal 10
 > Selanjutnya coba tambahkan konfigurasi autentikasi di LB dengan dengan kombinasi username: “netics” dan password: “ajkyyy”, dengan yyy merupakan kode kelompok. Terakhir simpan file “htpasswd” nya di /etc/nginx/rahasisakita/ 
 
-Sebelum mengerjakan perlu untuk melakukan [setup](#setup_di_awal) terlebih dahulu. Setelah itu, lakukan beberapa konfigurasi sebagai berikut
+Sebelum mengerjakan perlu untuk melakukan [setup](#setup-di-awal) terlebih dahulu. Setelah itu, lakukan beberapa konfigurasi sebagai berikut
 
 ### Script
 ```sh 
@@ -714,22 +724,24 @@ auth_basic_user_file /etc/nginx/rahasisakita/htpasswd;
 ```
 
 ### Result
-Jadi, ketika kita mengakses kembali url ``http://www.granz.channel.it26.com/`` akan terdapat unauthorized sebagai berikut 
+Jadi, ketika kita mengakses kembali url ``http://www.granz.channel.it26.com/`` akan menjadi unauthorized sebagai berikut 
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/17ef2476-6555-48e8-a216-bf836edc8dfc)
+![10_IPdeny](https://github.com/aloybm/jarkom-it26/assets/103870239/b1c6c2e0-7ccf-4646-8fef-46ed059dad13)
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/c32e683b-3285-4263-be47-c234c3250ffb)
+![10_Sukses](https://github.com/aloybm/jarkom-it26/assets/103870239/415de082-3f60-4e20-94e5-0ee44c21cb88)
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/ab94c3aa-9ff1-4275-bfc6-b038465af0e4)
+![10_Sukses2](https://github.com/aloybm/jarkom-it26/assets/103870239/ee5f79e9-a54e-4833-a597-28d9e0c3dc2a)
+
 
 **Setelah berhasil Autentikasi**
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/05e43a73-f45e-41a4-bc7c-9755a18da84c)
+![10_Hasil](https://github.com/aloybm/jarkom-it26/assets/103870239/58b26332-6fa7-4a64-b00c-d30c907dc220)
+
 
 ## Soal 11
 > Lalu buat untuk setiap request yang mengandung /its akan di proxy passing menuju halaman https://www.its.ac.id. (11) hint: (proxy_pass)
 
-Sebelum mengerjakan perlu untuk melakukan [setup](#setup_di_awal) terlebih dahulu. Setelah itu, lakukan beberapa konfigurasi tambahan pada nginx sebagai berikut 
+Sebelum mengerjakan perlu untuk melakukan [setup](#setup-di-awal) terlebih dahulu. Setelah itu, lakukan beberapa konfigurasi tambahan pada nginx sebagai berikut 
 
 ### Script
 ```sh
@@ -779,7 +791,7 @@ lynx www.granz.channel.it26.com/its
 
 ### Result
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/c1cedf3f-0eda-42c1-9b37-9dd82b614345)
+![10_Hasil](https://github.com/aloybm/jarkom-it26/assets/103870239/58b26332-6fa7-4a64-b00c-d30c907dc220)
 
 ## Soal 12
 > Selanjutnya LB ini hanya boleh diakses oleh client dengan IP [Prefix IP].3.69, [Prefix IP].3.70, [Prefix IP].4.167, dan [Prefix IP].4.168. 
@@ -839,29 +851,22 @@ Disini kami hanya mengizinkan beberapa ``IP`` saja sesuai dengan ketentual soal 
 
 **IP Deny**
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/bc177f35-a148-4328-b99e-0f236d984260)
+![10_IPdeny](https://github.com/aloybm/jarkom-it26/assets/103870239/1770749c-9f38-43ed-91b1-d0116216fdfb)
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/it261d850-759b-4bdd-b02f-f2ca81fef387)
 
 **IP Allow**
 
-Karena IP yang diberikan random, sekarang kami akan melakukan tambahan allow pada ``IP 192.246.3.19`` pada konfigurasi sebelumnya
-
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/bc177f35-a148-4328-b99e-0f236d984260)
+Menggunakan `fixed address` pada client `Richter` dimana kita bisa menambahkan konfigurasi berikut pada `dhcp server`
 
 ```sh
-location / {
-    allow 192.246.3.69;
-    allow 192.246.3.70;
-    allow 192.246.3.19;
-    allow 192.246.4.167;
-    allow 192.246.4.168;
-    deny all;
-    proxy_pass http://worker;
-}
+host Richter {
+    hardware ethernet 2e:7b:e8:07:50:9f;
+    fixed-address 192.246.3.69;
+}'
 ```
+Lakukan `stop` dan `start` ulang pada node `Richter`
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/f792f249-a13a-4891-9850-09471b861447)
+![10_Hasil](https://github.com/aloybm/jarkom-it26/assets/103870239/58b26332-6fa7-4a64-b00c-d30c907dc220)
 
 ## Soal 13
 > Semua data yang diperlukan, diatur pada Denken dan harus dapat diakses oleh Frieren, Flamme, dan Fern. (13)
@@ -886,7 +891,7 @@ skip-bind-address
 ' > /etc/mysql/my.cnf
 ```
 
-Lalu jangan lupa untuk mengganti ``[bind-address]`` pada file ``/etc/mysql/mariadb.conf.d/50-server.cnf`` menjadi ``0.0.0.0`` 
+Lalu jangan lupa untuk mengubah ``[bind-address]`` pada file ``/etc/mysql/mariadb.conf.d/50-server.cnf`` menjadi ``0.0.0.0`` 
 
 ```sh 
 cd /etc/mysql/mariadb.conf.d/50-server.cnf
@@ -910,17 +915,16 @@ GRANT ALL PRIVILEGES ON *.* TO 'kelompokit26'@'%';
 GRANT ALL PRIVILEGES ON *.* TO 'kelompokit26'@'localhost';
 FLUSH PRIVILEGES;
 ```
-
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/dad18b05-ea3e-452e-8440-a45354143157)
+![13_Proses](https://github.com/aloybm/jarkom-it26/assets/103870239/4f384965-1e3d-470a-b9ed-b44a01ce51b8)
 
 ### Result
-Setelah itu lakukan pengecekan di salah satu Laravel Worker. Disini kami akan melakukan pengecekan pada worker ``Fern`` dengan melakukan perintah ``shell`` berikut
+Setelah itu lakukanlah pengecekan di salah satu Laravel Worker. Disini kami akan melakukan pengecekan pada worker ``Fern`` dengan melakukan perintah ``shell`` berikut
 
 ```sh
 mariadb --host=192.246.2.1 --port=3306 --user=kelompokit26 --password=passwordit26 dbkelompokit26 -e "SHOW DATABASES;"
 ```
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/6f75d17d-e078-442b-bee0-b5082e441fc3)
+![13](https://github.com/aloybm/jarkom-it26/assets/103870239/f4600aff-3e27-4751-9c8d-79edc55b527c)
 
 ## Soal 14
 > Frieren, Flamme, dan Fern memiliki Granz Channel sesuai dengan quest guide berikut. Jangan lupa melakukan instalasi PHP8.0 dan Composer 
@@ -1065,7 +1069,8 @@ lynx localhost:[PORT]
 ```
 dimana PORT yang ada adalah ``8001`` ``8002`` dan ``8003``. Sesuaikan dengan setup nginx sebelumnya.
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/931d4075-3b54-43fc-86d2-e392876d42a9)
+![14_Masuk](https://github.com/aloybm/jarkom-it26/assets/103870239/a5a979d7-cb04-4e71-a3ae-a53374748829)
+
 
 
 ## Soal 15
@@ -1088,13 +1093,8 @@ ab -n 100 -c 10 -p register.json -T application/json http://192.246.4.1:8001/api
 ```
 
 ### Result
-Terdapat error dalam pengiriman sebanyak 100 request. Dikarenakan pada table ``users`` adalah unique. Dimana data ``username`` yang dimasukkan tidak boleh sama. Sehingga menyebabkan hanya ``1`` request saja yang diproses. ``99`` proses lainnya tidak diproses
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/4f7c6a72-763c-4aed-9d33-3ba40b7ea48e)
-
-Berikut merupakan grafik dan report yang didapat
-
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/05097fd1-8779-4a3f-8135-15cf48848544)
+![15](https://github.com/aloybm/jarkom-it26/assets/103870239/60b2acba-41bf-43b0-98d3-11ae75bd761e)
 
 ## Soal 16
 > Granz Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 request dengan 10 request/second. Tambahkan response dan hasil testing pada grimoire. Untuk POST /api/auth/login 
@@ -1116,11 +1116,9 @@ ab -n 100 -c 10 -p login.json -T application/json http://192.246.4.1:8001/api/au
 ```
 
 ### Result
-Terdapat error dalam pengiriman sebanyak 100 request. Karena satu worker saja tidak kuat untuk mendapatkan request sebanyak itu 100 dalam waktu yang telah diberikan atau dengan kata lain CPU yang diterima tidak sanggup untuk memproses banyaknya request. Sehingga menyebabkan hanya ``63`` request saja yang berhasil di proses sedangkan ``37`` lainnya tidak berhasil di proses
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/3e1664bc-123a-47bd-8318-2eaae62f2d3a)
+![16](https://github.com/aloybm/jarkom-it26/assets/103870239/52a9d5dd-8af8-4c4f-9a3f-604b1859be4c)
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/4ee43597-bef3-4c0e-bcb6-0237382a6004)
 
 ## Soal 17
 > Granz Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 request dengan 10 request/second. Tambahkan response dan hasil testing pada grimoire. Untuk GET /api/me
@@ -1134,8 +1132,6 @@ Dapatkan tokennya terlebih dahulu sebelum mengakses endpoint ``/api/me``
 ```sh
 curl -X POST -H "Content-Type: application/json" -d @login.json http://192.246.4.1:8001/api/auth/login > login_output.txt
 ```
-
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/40a9b98d-c737-4e03-8e95-4d0c0273fda3)
 
 Lalu jalankan perintah berikut untuk melakukan set ``token`` secara global
 
@@ -1152,9 +1148,8 @@ ab -n 100 -c 10 -H "Authorization: Bearer $token" http://192.246.4.1:8001/api/me
 ### Result 
 Terdapat error dalam pengiriman sebanyak 100 request. Karena satu worker saja tidak kuat untuk mendapatkan request sebanyak itu 100 dalam waktu yang telah diberikan atau dengan kata lain CPU yang diterima tidak sanggup untuk memproses banyaknya request. Sehingga menyebabkan hanya ``62`` request saja yang berhasil di proses sedangkan ``38`` lainnya tidak berhasil di proses
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/f65ac13d-2b36-4e9c-8b71-43ea2d6ea827)
+![17](https://github.com/aloybm/jarkom-it26/assets/103870239/70de57e3-aa65-4ba0-9cdd-c4c47e2ed6c3)
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/c58c1181-e387-476b-a0ef-ffdbe5278614)
 
 ## Soal 18
 > Untuk memastikan ketiganya bekerja sama secara adil untuk mengatur Granz Channel maka implementasikan Proxy Bind pada Eisen untuk mengaitkan IP dari Frieren, Flamme, dan Fern. 
@@ -1194,21 +1189,25 @@ Setelah melakukan konfigurasi pada ``load balancer`` pada ``Eisen``. Sekarang wa
 ab -n 100 -c 10 -p login.json -T application/json http://www.granz.channel.it26.com/api/auth/login
 ```
 
-akan memperoleh hasil sebagai berikut 
+Hasilnya adalah sebagai berikut!
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/e490249c-fd50-4849-89d6-57410e0fe424)
+![18_Hasil](https://github.com/aloybm/jarkom-it26/assets/103870239/6327661f-764e-4318-8825-31c698562a03)
+
 
 **Fern**
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/6c42fb62-4604-4b98-8ee6-37e4ed29b980)
+![18_Fern](https://github.com/aloybm/jarkom-it26/assets/103870239/81deeaa0-4dd1-4b10-8fcb-6bd63843ea27)
+
 
 **Flamme**
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/c86dcd29-6adb-4263-8054-8ec069b6cabf)
+![18_Flame](https://github.com/aloybm/jarkom-it26/assets/103870239/2f717d51-0f87-4677-a9af-4fdb34792535)
+
 
 **Frieren**
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/9c85cdfb-0179-4cd7-8c51-ba5fcd9f2859)
+![Fieren](https://github.com/aloybm/jarkom-it26/assets/103870239/088592c2-da02-46d0-bc6e-517d471e97ae)
+
 
 ## Soal 19
 > Untuk meningkatkan performa dari Worker, coba implementasikan PHP-FPM pada Frieren, Flamme, dan Fern. Untuk testing kinerja naikkan -> pm.max_children, pm.start_servers, pm.min_spare_servers, pm.max_spare_servers sebanyak tiga percobaan dan lakukan testing sebanyak 100 request dengan 10 request/second kemudian berikan hasil analisisnya pada Grimoire.
@@ -1323,19 +1322,23 @@ service php8.0-fpm restart
 
 **Script 1**
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/f9f3a702-c699-487b-922e-4bdc9cf0f8c9)
+![19_Script 1](https://github.com/aloybm/jarkom-it26/assets/103870239/880e085e-66a7-4660-9587-e7382d98bcb7)
+
 
 **Script 2**
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/6550d9fa-6bef-44d7-acf6-84f9d92446b6)
+![19_Script 2](https://github.com/aloybm/jarkom-it26/assets/103870239/885a33fd-ae14-4446-bf06-55c821e875a8)
+
 
 **Script 3**
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/1353febe-e4fa-4f5c-82b8-7046d29886fd)
+![19)_Script 3](https://github.com/aloybm/jarkom-it26/assets/103870239/89f89e63-3322-4d6c-90af-492d219a1521)
+
 
 **Script 4**
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/eb2fa242-2eb2-4580-ba64-dc296985cbf3)
+![19_Script 4](https://github.com/aloybm/jarkom-it26/assets/103870239/38a56e90-b1ec-4463-9f06-43241b28cd1e)
+
 
 ## Soal 20
 > Nampaknya hanya menggunakan PHP-FPM tidak cukup untuk meningkatkan performa dari worker maka implementasikan Least-Conn pada Eisen. Untuk testing kinerja dari worker tersebut dilakukan sebanyak 100 request dengan 10 request/second. (20)
@@ -1378,7 +1381,8 @@ pm.max_spare_servers = 20
 ### Result
 Jika ditambahkan Algoritma ``Load Balancing Least-connection``. Hasil yang didapatkan cukup ``signifikan`` sebagai berikut 
 
-![image](https://github.com/Raf/go-gin-clean-template/assets/92671053/76a9467a-e5e9-49b4-9ccd-0be823e29550)
+![20](https://github.com/aloybm/jarkom-it26/assets/103870239/6965bfdd-d7f9-4f66-98f1-9bcd90950e3e)
 
-Dapat disimpulkan bahwa algoritma ``Least-connection`` dapat berkerja dengan baik
+
+Kesimpulannnya, algoritma ``Least-connection`` dapat berkerja dengan baik
 
