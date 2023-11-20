@@ -14,6 +14,6 @@ echo '
 # POST Login
 echo '
 {
-  "username": "kelompoka09",
-  "password": "passworda09"
+  "username": "kelompokit26",
+  "password": "passwordit26"
 }' > login.json
