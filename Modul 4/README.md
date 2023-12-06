@@ -88,32 +88,46 @@ Jika konfigurasi dengan benar maka hasilnya akan Successfull. Berikut contoh dar
 
 CIDR menggunakan GNS3, memerlukan proses Penggabungan Topologi
 
-#### Tahap 1 (A)
+#### Penggabungan Topologi
+##### Tahap 1 (A)
 ![image](https://github.com/aloybm/jarkom-it26/assets/103870239/8b9c318e-3186-471f-9275-7198ccb82f87)
 
-#### Tahap 2 (B)
+##### Tahap 2 (B)
 ![image](https://github.com/aloybm/jarkom-it26/assets/103870239/1dd91084-fa5f-4327-b4d2-c0a569f74f71)
 
-#### Tahap 3 (C)
+##### Tahap 3 (C)
 ![image](https://github.com/aloybm/jarkom-it26/assets/103870239/174516ea-6eb6-431b-a0eb-e034ff73777d)
 
-#### Tahap 4 (D)
+##### Tahap 4 (D)
 ![image](https://github.com/aloybm/jarkom-it26/assets/103870239/39ee5d29-926d-4617-8fce-4e25df8cbae1)
 
-#### Tahap 5 (E)
+##### Tahap 5 (E)
 ![image](https://github.com/aloybm/jarkom-it26/assets/103870239/3fee9155-f36f-4cbd-8c19-884e8446e6d2)
 
-#### Tahap 6 (F)
+##### Tahap 6 (F)
 ![image](https://github.com/aloybm/jarkom-it26/assets/103870239/8eddf86d-ad61-4bdc-aa9b-115dd8bcf607)
 
-#### Tahap 7 (G)
+##### Tahap 7 (G)
 ![image](https://github.com/aloybm/jarkom-it26/assets/103870239/95a539b1-c27f-43ec-9c7b-ff4df291d66e)
 
-#### Tahap 8 (H)
+##### Tahap 8 (H)
 ![image](https://github.com/aloybm/jarkom-it26/assets/103870239/1a768976-30c1-4811-bc1d-0fa7061c3b9a)
 
-#### Tahap 9 (I)
+##### Tahap 9 (I)
 ![image](https://github.com/aloybm/jarkom-it26/assets/103870239/e8efbb77-eeee-4516-ab05-ae6d98cbf525)
+
+##### Penggambaran 
+![I](https://github.com/aloybm/jarkom-it26/assets/103870239/0c0906aa-d3bc-4fb7-8845-d16303477609)
+
+#### Tree 
+![Tree_Fix](https://github.com/aloybm/jarkom-it26/assets/103870239/5e442d8a-5f5b-4c9a-8630-7830d7363e7e)
+
+#### Pembagian IP CIDR
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/752b90f2-9098-46f0-adfc-71d83924409f)
+
+### Routing
+Melakukan konfigurasi pada gns
+
 
 #### Kendala
 Kendala yang dialami adalah dibutuhkan kefokuskan agar pada konfigurasi tidak terjadi kesalahan.
