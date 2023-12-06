@@ -18,9 +18,9 @@ skip-networking=0
 skip-bind-address
 ' > /etc/mysql/my.cnf
 
-# CREATE USER 'kelompokit26'@'%' IDENTIFIED BY 'passwordit26';
-# CREATE USER 'kelompokit26'@'localhost' IDENTIFIED BY 'passwordit26';
-# CREATE DATABASE dbkelompokit26;
-# GRANT ALL PRIVILEGES ON *.* TO 'kelompokit26'@'%';
-# GRANT ALL PRIVILEGES ON *.* TO 'kelompokit26'@'localhost';
-# FLUSH PRIVILEGES;
+CREATE USER 'kelompokit26'@'%' IDENTIFIED BY 'passwordit26';
+CREATE USER 'kelompokit26'@'localhost' IDENTIFIED BY 'passwordit26';
+CREATE DATABASE dbkelompokit26;
+GRANT ALL PRIVILEGES ON *.* TO 'kelompokit26'@'%';
+GRANT ALL PRIVILEGES ON *.* TO 'kelompokit26'@'localhost';
+FLUSH PRIVILEGES;
