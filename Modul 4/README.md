@@ -85,5 +85,5 @@ Jika konfigurasi dengan benar maka hasilnya akan Successfull. Berikut contoh dar
 ![image](https://github.com/aloybm/jarkom-it26/assets/100351038/fb5fa25f-2f88-4d91-a327-8aaf051cd8a4)
 
 #### Kendala
-Kendalah yang dialami adalah dibutuhkan kefokuskan agar pada konfigurasi tidak terjadi kesalahan.
+Kendala yang dialami adalah dibutuhkan kefokuskan agar pada konfigurasi tidak terjadi kesalahan.
 
