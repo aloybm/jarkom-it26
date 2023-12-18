@@ -86,7 +86,7 @@ Tree yang kami buat didapatkan dari hasil pengelompokkan [Topologi VLSM](#topolo
 ### Pembagian IP
 Berikut adalah pembagian IP yang telah kami dapatkan dari hasil [Tree](#tree) tersebut
 
-![image](https://github.com/Caknoooo/Jarkom-Modul-4-A09-2023/assets/92671053/109bada5-5deb-48fb-9e50-d473b7428435)
+![image](https://github.com/aloybm/jarkom-it26/assets/103870239/f2b47293-8cf5-475e-80d5-0654c2ee747d)
 
 ### Subnetting 
 
