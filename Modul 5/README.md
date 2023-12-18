@@ -547,17 +547,20 @@ Disini akan dilakukan testing terhadap ``client`` yang akan menuju ``Revolte`` d
 
 Disini akan digunakan port ``8080`` pada koneksi ``tcp``
 
-![image](https://github.com/Caknoooo/information-security-be/assets/92671053/e986af07-9cda-4b5f-a5d7-335100079954)
+![mod5_2_tcp](https://github.com/aloybm/jarkom-it26/assets/103870239/640d7b4d-8f93-41fa-ac3b-21c00cbcb5a1)
+
 
 **Gagal** 
 
 Karena port ``8080`` pada UDP juga tidak di blok, jadi tidak akan saling terkoneksi
 
-![image](https://github.com/Caknoooo/information-security-be/assets/92671053/fc7c8068-211b-4d84-9105-b741c1b39cc6)
+![mod5_2_udp](https://github.com/aloybm/jarkom-it26/assets/103870239/c15d1fb2-f448-4676-847e-1f3d1f356506)
 
-port yang lain (yang di blok) -> contoh port ``3000`` dengan tcp
 
-![image](https://github.com/Caknoooo/information-security-be/assets/92671053/96eaedd9-bf5a-496d-b25c-5124f6deabb2)
+port yang lain (yang di blok) -> contoh port ``5000`` dengan tcp
+
+![mod5_2_bukan8080](https://github.com/aloybm/jarkom-it26/assets/103870239/c0919f97-740b-4643-a993-0eb76546dbe0)
+
 
 ## Soal 3
 > Kepala Suku North Area meminta kalian untuk membatasi DHCP dan DNS Server hanya dapat dilakukan ping oleh maksimal 3 device secara bersamaan, selebihnya akan di drop.
@@ -588,9 +591,9 @@ Jadi, aturan ini akan menolak paket ICMP jika jumlah koneksi ICMP dari satu alam
 
 ### Testing
 
-![image](https://github.com/Caknoooo/information-security-be/assets/92671053/e9f421d8-6fc2-437a-a8c6-dcf4babed9c9)
+![mod5_3_lgjalan](https://github.com/aloybm/jarkom-it26/assets/103870239/442ae2e0-dc44-4c70-9374-c576dc31c861)
 
-Pada ``GrobeForest`` tidak berhasil melakukan ``ping`` karena ``Revolte`` sudah mencapat 3 koneksi.
+
 
 ## Soal 4
 > Lakukan pembatasan sehingga koneksi SSH pada Web Server hanya dapat dilakukan oleh masyarakat yang berada pada GrobeForest.
@@ -617,13 +620,8 @@ Jadi, aturan ini memungkinkan lalu lintas TCP yang menuju ke port 22 (SSH) dari 
 ### Testing
 Disini kami akan melakukan ``testing`` dimana kami akan menggunakan ``GrobeForest`` -> Sukses dan ``TurkRegion`` -> Gagal
 
-**GrobeForest**
+![mod5_4](https://github.com/aloybm/jarkom-it26/assets/103870239/e054af11-3a3b-44e0-997a-1cf2d68f57a8)
 
-![image](https://github.com/Caknoooo/information-security-be/assets/92671053/354beb06-285b-4f9d-bc10-c8200c03925f)
-
-**TurkRegion**
-
-![image](https://github.com/Caknoooo/information-security-be/assets/92671053/6b3027a3-18ef-4bc5-ae5c-5ebed92d539c)
 
 ## Soal 5
 > Selain itu, akses menuju WebServer hanya diperbolehkan saat jam kerja yaitu Senin-Jumat pada pukul 08.00-16.00.
@@ -655,11 +653,13 @@ Disini kami akan melakukan testing `Sukses` dan `Gagal`
 
 **Sukses**
 
-![image](https://github.com/Caknoooo/information-security-be/assets/92671053/73de3c3e-0b28-4c54-b616-7c38abdec8a8)
+![mod5_5_sukses](https://github.com/aloybm/jarkom-it26/assets/103870239/45f73ec9-d574-466a-8c5e-64cced4f379a)
+
 
 **Gagal**
 
-![image](https://github.com/Caknoooo/information-security-be/assets/92671053/f6a11ad2-228b-494c-a66e-c826440e1d0e)
+![mod5_5_gagal](https://github.com/aloybm/jarkom-it26/assets/103870239/33f89ce8-db8c-4dbc-8c9c-a5ccf1b82f3e)
+
 
 ## Soal 6
 > Lalu, karena ternyata terdapat beberapa waktu di mana network administrator dari WebServer tidak bisa stand by, sehingga perlu ditambahkan rule bahwa akses pada hari Senin - Kamis pada jam 12.00 - 13.00 dilarang (istirahat maksi cuy) dan akses di hari Jumat pada jam 11.00 - 13.00 juga dilarang (maklum, Jumatan rek).
@@ -689,11 +689,13 @@ Pada testing kali ini kami akan mencoba untuk melakukan pada waktu yang telah di
 
 **Sukses**
 
-![image](https://github.com/Caknoooo/information-security-be/assets/92671053/41d20fa3-486b-4463-bb15-55d6c950db0c)
+![mod5_6_sukses](https://github.com/aloybm/jarkom-it26/assets/103870239/88faf1a2-f094-42e3-8a5c-548937b0bfea)
+
 
 **Gagal**
 
-![image](https://github.com/Caknoooo/information-security-be/assets/92671053/1d1063f3-7a21-4b57-96e1-f37525a2c69d)
+![mod5_6_gagal](https://github.com/aloybm/jarkom-it26/assets/103870239/9e94fe74-45aa-4c1c-886b-2b48765ef3dd)
+
  
 ## Soal 7
 > Karena terdapat 2 WebServer, kalian diminta agar setiap client yang mengakses Sein dengan Port 80 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan dan request dari client yang mengakses Stark dengan port 443 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan.
@@ -727,13 +729,13 @@ Setelah mengizinkan ``port https``, sekarang saatnya melakukan konfigurasi denga
 ```sh
 echo "
 <VirtualHost *:80>
-    ServerName 192.173.4.2
+    ServerName 192.246.4.2
     DocumentRoot /var/www/html
     ErrorLog \${APACHE_LOG_DIR}/error.log
     CustomLog \${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 <VirtualHost *:443>
-    ServerName 192.173.4.2
+    ServerName 192.246.4.2
     DocumentRoot /var/www/html
     ErrorLog \${APACHE_LOG_DIR}/error.log
     CustomLog \${APACHE_LOG_DIR}/access.log combined
@@ -746,52 +748,56 @@ service apache2 restart
 
 Setelah itu lakukan ``iptables`` pada ``router`` yang mengarah pada ``web server`` yaitu sein dan stark sebagai berikut
 ```sh
-iptables -A PREROUTING -t nat -p tcp --dport 80 -d 192.173.4.2 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.173.4.2:80
-iptables -A PREROUTING -t nat -p tcp --dport 80 -d 192.173.4.2 -j DNAT --to-destination 192.173.1.118:80
-iptables -A PREROUTING -t nat -p tcp --dport 443 -d 192.173.1.118 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.173.1.118:443
-iptables -A PREROUTING -t nat -p tcp --dport 443 -d 192.173.1.118 -j DNAT --to-destination 192.173.4.2:443
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 192.246.4.2 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.246.4.2:80
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 192.246.4.2 -j DNAT --to-destination 192.173.1.118:80
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 192.246.1.118 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.246.1.118:443
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 192.246.1.118 -j DNAT --to-destination 192.173.4.2:443
 ```
 
 ### Testing
 Untuk melakukan ``testing`` hanya perlu melakukan command seperti berikut
 
 ```sh
-curl 192.173.4.2:80
-curl 192.173.1.118:443
+curl 192.246.4.2:80
+curl 192.246.1.118:443
 ```
 
-![image](https://github.com/Caknoooo/Jarkom-Modul-5-A09-2023/assets/92671053/a9d2e625-84c9-4ab5-864a-9f5a282edfc4)
+![mod5_7](https://github.com/aloybm/jarkom-it26/assets/103870239/b70f208b-896c-4bc7-a4b8-4bf7a05f58db)
+
 
 ## Soal 8
 > Karena berbeda koalisi politik, maka subnet dengan masyarakat yang berada pada Revolte dilarang keras mengakses WebServer hingga masa pencoblosan pemilu kepala suku 2024 berakhir. Masa pemilu (hingga pemungutan dan penghitungan suara selesai) kepala suku bersamaan dengan masa pemilu Presiden dan Wakil Presiden Indonesia 2024
 
 ### Script 
-Untuk mengerjakan nomor ini diperlukan bantuan ``--datestart`` dan ``--datestop`` untuk melakukan pembatasan akses pada hari-hari tertentu. Disini diperlukan ``subnet`` dari ``Revolte`` karena pembatasn yang diinginkan adalah terhadap subnet. Disini ``subnet`` kami adalah terdapat pada ``A10`` dimana memiliki ip ``192.173.1.104/30`` dan menentukan protokol yang digunakan sebagai berikut 
+Untuk mengerjakan nomor ini diperlukan bantuan ``--datestart`` dan ``--datestop`` untuk melakukan pembatasan akses pada hari-hari tertentu. Disini diperlukan ``subnet`` dari ``Revolte`` karena pembatasn yang diinginkan adalah terhadap subnet. Disini ``subnet`` kami adalah terdapat pada ``A10`` dimana memiliki ip ``192.246.1.104/30`` dan menentukan protokol yang digunakan sebagai berikut 
 
 ```sh
-iptables -A INPUT -p tcp --dport 80 -s 192.173.1.104/30 -m time --datestart 2023-12-10 --datestop 2024-02-15 -j DROP
+iptables -A INPUT -p tcp --dport 80 -s 192.246.1.104/30 -m time --datestart 2023-12-10 --datestop 2024-02-15 -j DROP
 ```
 
 **Penjelasan**
 - ``-A INPUT``: Menambahkan aturan ke chain INPUT (rantai yang digunakan untuk lalu lintas yang menuju ke sistem).
 - ``-p tcp``: Menentukan protokol yang digunakan, dalam hal ini TCP.
 - ``--dport 80``: Menentukan port tujuan, dalam hal ini port 80 (umumnya digunakan untuk layanan HTTP).
-- ``-s 192.173.1.104/30``: Menentukan alamat sumber yang diizinkan. Dalam hal ini, hanya lalu lintas yang berasal dari rentang IP 192.173.1.104 hingga 192.173.1.107 (192.173.1.104/30) yang diizinkan masuk.
+- ``-s 192.246.1.104/30``: Menentukan alamat sumber yang diizinkan. Dalam hal ini, hanya lalu lintas yang berasal dari rentang IP 192.173.1.104 hingga 192.173.1.107 (192.173.1.104/30) yang diizinkan masuk.
 - ``-m time --datestart 2023-12-10 --datestop 2024-02-15``: Menggunakan modul waktu untuk menentukan aturan berdasarkan tanggal. Aturan ini akan berlaku mulai dari tanggal 10 Desember 2023 hingga 15 Februari 2024.
 - ``-j DROP``: Menentukan tindakan yang diambil jika paket memenuhi kriteria aturan, dalam hal ini menolak (DROP) paket.
 
 ### Testing
 testing dengan menggunakan ``client``
 
-![image](https://github.com/Caknoooo/Jarkom-Modul-5-A09-2023/assets/92671053/259b6c8a-a1cb-4c8a-aee1-d1ac3832c015)
+![mod5_8_client](https://github.com/aloybm/jarkom-it26/assets/103870239/ae30f4f9-4d51-4af0-97bc-41e6389eb23c)
+
 
 testing dengan menggunakan ``revolte`` dimana sudah diakukan pemblokan
 
-![image](https://github.com/Caknoooo/Jarkom-Modul-5-A09-2023/assets/92671053/6c0cfc43-12b2-40ca-b970-b792dae8f8b7)
+![mod5_8_pemilurevolte](https://github.com/aloybm/jarkom-it26/assets/103870239/3db6c737-21e4-40d7-abdc-a2fa522e3de9)
+
 
 testing dengan menggunkan ``revote`` tetapi di waktu yang diizinkan
 
-![image](https://github.com/Caknoooo/Jarkom-Modul-5-A09-2023/assets/92671053/14a9eb76-14a3-4bb9-9b19-85aa97ea4447)
+![mod5_8_waktuizin](https://github.com/aloybm/jarkom-it26/assets/103870239/f8e97cd3-5d91-4458-8699-1ba8351e9ee3)
+
 
 ## Soal 9
 > Sadar akan adanya potensial saling serang antar kubu politik, maka WebServer harus dapat secara otomatis memblokir  alamat IP yang melakukan scanning port dalam jumlah banyak (maksimal 20 scan port) di dalam selang waktu 10 menit. (clue: test dengan nmap)
@@ -850,7 +856,8 @@ iptables -A FORWARD -m recent --name portscan --set -j ACCEPT
 ### Testing
 Untuk melakukan testing, kami menggunakan ``ping`` terhadap ``Web Server`` yaitu ``Sein`` 
 
-![image](https://github.com/Caknoooo/information-security-be/assets/92671053/5f2f77a5-5d50-4e2b-ae7f-7ebdf1693a67)
+![mod5_9](https://github.com/aloybm/jarkom-it26/assets/103870239/ccba03ac-e2c7-4fb6-b2b8-95220f297908)
+
 
 Disaat ``packet`` yang telah terkirim lebih dari 20, maka ``packet`` selanjutnya akan langsung di ``drop``.
 
