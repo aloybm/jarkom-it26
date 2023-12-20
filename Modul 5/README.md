@@ -803,7 +803,7 @@ testing dengan menggunkan ``revote`` tetapi di waktu yang diizinkan
 > Sadar akan adanya potensial saling serang antar kubu politik, maka WebServer harus dapat secara otomatis memblokir  alamat IP yang melakukan scanning port dalam jumlah banyak (maksimal 20 scan port) di dalam selang waktu 10 menit. (clue: test dengan nmap)
 
 ### Script 
-Karena pada soal 9 ini kita diperlukan untuk menggunakan *scanning port* maka diperlukan rantai khusus bernama ``portscan``. Rantai ini nantinya dapat digunakan untuk mengelola aturan-aturan terkait dengan deteksi port scanning.
+Untuk mengerjakan nomor ini diperlukan bantuan --hitcount dan --seconds untuk melakukan pembatasan akses pada hari-hari tertentu. Selanjutnya kita bisa mengatur settingan dari iptables sebagai berikut :
 
 ```sh
 iptables -N portscan
@@ -815,55 +815,33 @@ iptables -A INPUT -m recent --name portscan --set -j ACCEPT
 iptables -A FORWARD -m recent --name portscan --set -j ACCEPT
 ```
 
-**Penjelasan**
-
-- ``iptables -N portscan``: Ini membuat rantai khusus bernama portscan. Rantai ini nantinya dapat digunakan untuk mengelola aturan-aturan terkait dengan deteksi port scanning.
-
-```sh
-iptables -A INPUT -m recent --name portscan --update --seconds 600 --hitcount 20 -j DROP
-```
-- ``-m recent --name portscan``: Menggunakan modul recent untuk melacak koneksi atau paket.
-- ``--update``: Mengupdate informasi tentang paket terkini.
-- ``--seconds 600``: Menetapkan waktu dalam detik, dalam hal ini 600 detik (10 menit).
-- ``--hitcount 20``: Menetapkan jumlah hit (pembaruan) yang diperlukan untuk memicu aksi selanjutnya.
-- ``-j DROP``: Menentukan tindakan yang diambil jika kriteria aturan terpenuhi, dalam hal ini menolak (DROP) paket.
-
-Jadi, aturan ini akan menolak paket INPUT jika lebih dari 20 pembaruan terjadi dalam jangka waktu 10 menit, yang dapat dianggap sebagai tanda serangan port scanning.
-
-```sh 
-iptables -A FORWARD -m recent --name portscan --update --seconds 600 --hitcount 20 -j DROP
-```
-- Menambahkan aturan ke chain FORWARD.
-- Mirip dengan aturan sebelumnya, aturan ini menangani paket yang melewati sistem, yaitu paket yang di-forward. Jika jumlah pembaruan paket melebihi 20 dalam 10 menit, paket akan ditolak.
-
-```sh
-iptables -A INPUT -m recent --name portscan --set -j ACCEPT
-```
-
-- ``-m recent --name portscan``: Menggunakan modul recent untuk melacak koneksi atau paket.
-- ``--set``: Menetapkan informasi terkait dengan paket baru.
-- ``-j ACCEPT``: Menentukan tindakan yang diambil jika paket memenuhi kriteria aturan, dalam hal ini menerima paket.
-
-Jadi, aturan ini memungkinkan paket INPUT baru untuk melewati dan menetapkan informasi bahwa paket ini tidak terkait dengan serangan port scanning.
-
-```sh
-iptables -A FORWARD -m recent --name portscan --set -j ACCEPT
-```
-
-- Menambahkan aturan ke chain FORWARD.
-- Mirip dengan aturan sebelumnya, aturan ini memungkinkan paket yang di-forward untuk melewati dan menetapkan informasi bahwa paket ini tidak terkait dengan serangan port scanning.
-
 ### Testing
-Untuk melakukan testing, kami menggunakan ``ping`` terhadap ``Web Server`` yaitu ``Sein`` 
+Kita bisa melakukan testing untuk menentukan apakah port tersebut terbuka atau tidak dengan menggunakan nmap pada node TurkRegion dengan perintah 
 
-![mod5_9](https://github.com/aloybm/jarkom-it26/assets/103870239/ccba03ac-e2c7-4fb6-b2b8-95220f297908)
+```sh
+nmap 10.15.0.14 -p 1-10 # Masi bisa ngescan
+nmap 10.15.0.14 -p 1-30 # Langsung di block
+```
+![mod5_9](https://github.com/aloybm/jarkom-it26/assets/103870239/d908cb23-404e-40ce-9dd6-9e7fba7c8b63)
+![mod5_9 gagal](https://github.com/aloybm/jarkom-it26/assets/103870239/8bd602a2-1da7-48b4-b7c4-3bdb0d3da685)
 
-
-Disaat ``packet`` yang telah terkirim lebih dari 20, maka ``packet`` selanjutnya akan langsung di ``drop``.
+Dari gambar diatas kita bisa melihat bahwa port 1-10 masih bisa di scan sedangkan port 1-30 sudah tidak bisa di scan lagi
 
 ## Soal 10
 > Karena kepala suku ingin tau paket apa saja yang di-drop, maka di setiap node server dan router ditambahkan logging paket yang di-drop dengan standard syslog level. 
 
 ### Script 
+logging dapat ditambahkan dengan syntax iptables berikut yang dijalankan di semua node server dan router
+```sh
+iptables -A INPUT -j LOG --log-level debug --log-prefix "Dropped Packet: " -m limit --limit 1/second --limit-burst 10
+```
 
 ### Testing
+```sh
+iptables -L
+```
+
+![mod5_10](https://github.com/aloybm/jarkom-it26/assets/103870239/0e5b5270-8883-4b39-a8d4-0a7efba99c1d)
+
+## Kendala 
+- Praktikum dilaksanakan pada minggu akhir dan EAS yang dimana sulit untuk membagi waktu
